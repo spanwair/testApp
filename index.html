@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <input type="file" accept="image/*" onchange="chage(e)">
+<script>
+  let x = document.getElementById('app');
+  function change(e) {
+    console.log(e);
+    x.innerHTML = e;
+  }
+</script>
+
+</body>
+</html>
