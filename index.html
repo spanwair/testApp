@@ -8,12 +8,12 @@
 </head>
 <body>
   <div id="app"></div>
-  <input type="file" accept="image/*" onchange="change(e)">
+  <input type="file" accept="image/*" onchange="change(this)">
 <script>
   let x = document.getElementById('app');
   function change(e) {
-    console.log(e);
-    x.innerHTML = e;
+    console.log(e.value);
+    x.innerHTML = e.value;
   }
 </script>
 
