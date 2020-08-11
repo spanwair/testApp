@@ -16,13 +16,13 @@
   <button onclick="focusToApp()">Focus to app</button>
 <script>
   let x = document.getElementById('app');
+  let isNoMoreActive = true;
   function change(e) {
     console.log(e.value);
     x.innerHTML = e.value;
   }
   function focusToApp() {
     // pokud je aplikace nainstalována provede se přesměrování do aplikace
-    let isNoMoreActive = true;
     window.location = "myaxiory://";
 
     // pokud je aplikace nainstalována tak se tato funkce nikdy neprovede
