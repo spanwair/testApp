@@ -32,17 +32,24 @@
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       if (/android/i.test(userAgent)) {
         document.getElementById('device').innerHTML = 'Android';
+        localStorage.setItem('device', 'android');
         window.location = ''; // Android >> play store adresa
         return;
       }
       if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         document.getElementById('device').innerHTML = 'iOS';
+        localStorage.setItem('device', 'ios');
         window.location = ''; // iOS >> app store adresa
         return;
       }
+      localStorage.setItem('device', 'unknonw');
       document.getElementById('device').innerHTML = 'unknown';
       window.location = ''; // 'unknown' >> webová aplikace
     }, 100);
+  }
+  if (!!localStorage.getItem('device')) {
+    const device = localStorage.getItem('device');
+    document.getElementById('device').innerHTML = device;
   }
 </script>
 
