@@ -12,28 +12,35 @@
   <a href="myaxiory://">Link to app</a>
   <a href="myaxioryyy://">This is not working</a>
   <div id="device"></div>
+  <button onclick="focusToApp()">Focus to app</button>
 <script>
   let x = document.getElementById('app');
   function change(e) {
     console.log(e.value);
     x.innerHTML = e.value;
   }
-  function getMobileOperatingSystem() {
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return "Windows Phone";
-    }
-    if (/android/i.test(userAgent)) {
-        return "Android";
-    }
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-    }
-    return "unknown";
+  function focusToApp() {
+    // pokud je aplikace nainstalována provede se přesměrování do aplikace
+
+    window.location = "myaxiory://";
+
+    // pokud je aplikace nainstalována tak se tato funkce nikdy neprovede
+    // pokud aplikace není nainstalována vyhodnotí se jestli uživatel je právě na Androidu, iOs a nebo
+    // na neznámé zařízení. Podle toho také se přesměruje na příslušnou adresu
+
+    setTimeout(() => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(userAgent)) {
+        window.location = ''; // Android >> play store adresa
+        return;
+      }
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location = ''; // iOS >> app store adresa
+        return;
+      }
+      window.location = ''; // 'unknown' >> webová aplikace
+    }, 100);
   }
-  document.getElementById('device').innerHTML = getMobileOperatingSystem();
 </script>
 
 </body>
