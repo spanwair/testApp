@@ -21,7 +21,7 @@
   }
   function focusToApp() {
     // pokud je aplikace nainstalována provede se přesměrování do aplikace
-
+    let isNoMoreActive = true;
     window.location = "myaxiory://";
 
     // pokud je aplikace nainstalována tak se tato funkce nikdy neprovede
@@ -29,6 +29,9 @@
     // na neznámé zařízení. Podle toho také se přesměruje na příslušnou adresu
 
     setTimeout(() => {
+      if (!isNoMoreActive) {
+        return;
+      }
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       if (/android/i.test(userAgent)) {
         document.getElementById('device').innerHTML = 'Android';
@@ -47,6 +50,12 @@
       window.location = ''; // 'unknown' >> webová aplikace
     }, 1000);
   }
+  document.addEventListener('visibilitychange' , function() {
+    if (document.hidden) {
+      document.getElementById('device').innerHTML = 'it was off';
+      isNoMoreActive = false;
+    }
+  }, false);
   if (!!localStorage.getItem('device')) {
     const device = localStorage.getItem('device');
     document.getElementById('device').innerHTML = device;
